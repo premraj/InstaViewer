@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useTheme from '@material-ui/core/styles/useTheme';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -17,11 +17,6 @@ const App = () => {
       padding: mq414Down ? 15 : '20px 30px',
     },
   }))();
-
-  useEffect(() => {
-    const body = document.querySelector('body');
-    body.className = 'theme1';
-  }, []);
 
   return (
     <div className={classes.container}>
