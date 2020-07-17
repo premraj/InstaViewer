@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Search } from 'react-feather';
 
-const SearchBar = ({ isSmall }) => {
+const SearchBar = ({ isSmall, onEnter }) => {
   const classes = makeStyles(theme => ({
     inputCont: {
       width: '100%',
@@ -29,10 +29,17 @@ const SearchBar = ({ isSmall }) => {
       marginRight: 10,
     },
   }))();
+
+  const onPressEnter = e => {
+    if (e.key === 'Enter') {
+      onEnter(e.target.value);
+    }
+  };
+
   return (
     <div className={classes.inputCont}>
       <Search className={classes.iconSearch} />
-      <input className={classes.input} />
+      <input className={classes.input} onKeyUp={onPressEnter} />
     </div>
   );
 };
@@ -43,6 +50,7 @@ SearchBar.defaultProps = {
 
 SearchBar.propTypes = {
   isSmall: PropTypes.bool,
+  onEnter: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

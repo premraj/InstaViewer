@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import themes from './themes';
+import { SearchContextProvider } from './context/SearchContext';
 
 const Provider = () => {
   useEffect(() => {
@@ -11,7 +12,9 @@ const Provider = () => {
 
   return (
     <ThemeProvider theme={themes.theme1}>
-      <App />
+      <SearchContextProvider>
+        <App />
+      </SearchContextProvider>
     </ThemeProvider>
   );
 };

@@ -22,6 +22,10 @@ module.exports = function(env) {
     },
     resolve: {
       extensions: ['.js'],
+      alias: {
+        '@root': path.resolve(__dirname, 'src'),
+        '@utils': path.resolve(__dirname, 'src/utils'),
+      },
     },
     plugins: [new CopyPlugin([{ from: path.resolve(__dirname, 'public') }])],
     devServer: {
