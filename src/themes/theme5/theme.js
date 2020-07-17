@@ -1,13 +1,13 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const colors = {
-  c01: '#0C1118',
-  c02: '#1A2639',
+  c01: '#F5C16C',
+  c02: '#FCE3BB',
   c03: '#FFFFFF',
-  c04: '#C24D2C',
-  c05: '#D9DAD7',
-  c06: '#1A2639',
-  c07: '#3E4A61',
+  c04: '#AA530E',
+  c05: '#4E4A45',
+  c06: '#F3EDED',
+  c07: '#FCF6F6',
 };
 
 const fontFamily = 'Lato';

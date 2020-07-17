@@ -1,35 +1,32 @@
 import React, { useReducer, useMemo } from 'react';
 
-const SearchContext = React.createContext();
+const ThemeContext = React.createContext();
 
 const initialState = {
-  username: '',
+  theme: 'theme1',
 };
 
-export const actionAddSearchTerm = searchTerm => ({
-  type: 'addSearchTerm',
-  payload: searchTerm,
-});
+export const actionSetTheme = payload => ({ type: 'setTheme', payload });
 
 const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case 'addSearchTerm':
-      return { username: payload };
+    case 'setTheme':
+      return { theme: payload };
     default:
       return state;
   }
 };
 
-export const SearchContextProvider = ({ children }) => {
+export const ThemeContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   return (
-    <SearchContext.Provider value={contextValue}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
-    </SearchContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 
-export default SearchContext;
+export default ThemeContext;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useTheme from '@material-ui/core/styles/useTheme';
@@ -8,32 +8,35 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Settings, XCircle } from 'react-feather';
+import ThemeContext, { actionSetTheme } from '@root/context/ThemeContext';
 import SearchBar from '../SearchBar';
 
 const TopBar = ({ onEnter }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState('theme1');
+  const { state: themeContext, dispatch } = useContext(ThemeContext);
+  const { theme: selectedTheme } = themeContext;
+
   const theme = useTheme();
-  const mq800Up = useMediaQuery(theme.mq.Up800);
-  const mq414Down = useMediaQuery(theme.mq.Down414);
+  const mqUp800 = useMediaQuery(theme.mq.Up800);
+  const mqDown500 = useMediaQuery(theme.mq.Down500);
   const classes = makeStyles({
     container: {
-      height: 80,
+      height: mqDown500 ? 50 : 80,
       backgroundColor: theme.colors.c01,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: mq414Down ? 15 : '20px 30px',
+      padding: mqDown500 ? 15 : '20px 30px',
     },
     logoFront: {
       fontFamily: theme.fontFamily,
-      fontSize: mq414Down ? 24 : 28,
+      fontSize: mqDown500 ? 24 : 28,
       fontWeight: 'bold',
       color: theme.colors.c03,
     },
     logoBack: {
       fontFamily: theme.fontFamily,
-      fontSize: mq414Down ? 24 : 28,
+      fontSize: mqDown500 ? 24 : 28,
       fontWeight: 'bold',
       color: theme.colors.c04,
     },
@@ -58,7 +61,7 @@ const TopBar = ({ onEnter }) => {
     },
     drawer: {
       '& .MuiDrawer-paper': {
-        width: mq414Down ? '100%' : 400,
+        width: mqDown500 ? '100%' : 400,
         backgroundColor: theme.colors.c01,
         color: theme.colors.c05,
         padding: 30,
@@ -93,7 +96,7 @@ const TopBar = ({ onEnter }) => {
   };
 
   const setTheme = e => {
-    setSelectedTheme(e.target.value);
+    dispatch(actionSetTheme(e.target.value));
   };
 
   return (
@@ -102,7 +105,7 @@ const TopBar = ({ onEnter }) => {
         <span className={classes.logoFront}>INSTA</span>
         <span className={classes.logoBack}>VIEWER</span>
       </div>
-      {mq800Up && (
+      {mqUp800 && (
         <div className={classes.searchCont}>
           <SearchBar onEnter={onEnter} />
         </div>

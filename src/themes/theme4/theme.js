@@ -1,13 +1,13 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const colors = {
-  c01: '#0C1118',
-  c02: '#1A2639',
+  c01: '#D59DC5',
+  c02: '#825F78',
   c03: '#FFFFFF',
-  c04: '#C24D2C',
-  c05: '#D9DAD7',
-  c06: '#1A2639',
-  c07: '#3E4A61',
+  c04: '#000000',
+  c05: '#EADADA',
+  c06: '#4D3A4D',
+  c07: '#423242',
 };
 
 const fontFamily = 'Lato';
@@ -20,8 +20,8 @@ const theme = createMuiTheme({
     Down500: '(max-width:500px)',
   },
   button: {
-    backgroundColor: colors.c04,
-    color: colors.c03,
+    backgroundColor: colors.c01,
+    color: colors.c04,
     padding: '5px 8px',
     fontFamily: fontFamily,
     fontSize: 12,

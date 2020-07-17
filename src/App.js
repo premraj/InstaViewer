@@ -6,39 +6,46 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import SearchBar from './components/SearchBar';
 import routes from './routes';
-import SearchContext, { addSearchTerm } from './context/SearchContext';
+import SearchContext, { actionAddSearchTerm } from './context/SearchContext';
 
 const App = () => {
   const theme = useTheme();
   const { dispatch } = useContext(SearchContext);
-  const mq800Up = useMediaQuery(theme.mq.Up800);
-  const mq414Down = useMediaQuery(theme.mq.Down414);
+  const mqUp800 = useMediaQuery(theme.mq.Up800);
+  const mqDown500 = useMediaQuery(theme.mq.Down500);
   const classes = makeStyles({
     container: {
       backgroundColor: theme.colors.c06,
     },
     contentContainer: {
-      padding: mq414Down ? 15 : '20px 30px',
+      padding: mqDown500 ? 15 : '20px 30px',
+    },
+    scrollContainer: {
+      maxHeight: `calc(100vh - ${mqUp800 ? 120 : 240}px)`,
+      overflowY: 'auto',
+      marginTop: mqUp800 ? 0 : 15,
     },
   })();
 
   const onEnter = searchTerm => {
-    dispatch(addSearchTerm(searchTerm));
+    dispatch(actionAddSearchTerm(searchTerm));
   };
 
   return (
     <div className={classes.container}>
       <TopBar onEnter={onEnter} />
       <div className={classes.contentContainer}>
-        {!mq800Up && <SearchBar isSmall onEnter={onEnter} />}
-        <BrowserRouter>
-          <Switch>
-            {routes.map(({ key, path, component }) => (
-              <Route exact key={key} path={path} component={component} />
-            ))}
-            <Redirect to="/feed" />
-          </Switch>
-        </BrowserRouter>
+        {!mqUp800 && <SearchBar isSmall onEnter={onEnter} />}
+        <div className={classes.scrollContainer}>
+          <BrowserRouter>
+            <Switch>
+              {routes.map(({ key, path, component }) => (
+                <Route exact key={key} path={path} component={component} />
+              ))}
+              <Redirect to="/feed" />
+            </Switch>
+          </BrowserRouter>
+        </div>
       </div>
     </div>
   );

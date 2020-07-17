@@ -11,3 +11,19 @@ body {
 body.theme1 {
   background-color: #1a2639;
 }
+
+body.theme2 {
+  background-color: #363434;
+}
+
+body.theme3 {
+  background-color: #f5eded;
+}
+
+body.theme4 {
+  background-color: #4d3a4d;
+}
+
+body.theme5 {
+  background-color: #f3eded;
+}
