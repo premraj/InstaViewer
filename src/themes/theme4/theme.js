@@ -1,10 +1,10 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const colors = {
-  c01: '#D59DC5',
-  c02: '#825F78',
+  c01: '#342734',
+  c02: '#423242',
   c03: '#FFFFFF',
-  c04: '#000000',
+  c04: '#D452AF',
   c05: '#EADADA',
   c06: '#4D3A4D',
   c07: '#423242',
@@ -20,8 +20,8 @@ const theme = createMuiTheme({
     Down500: '(max-width:500px)',
   },
   button: {
-    backgroundColor: colors.c01,
-    color: colors.c04,
+    backgroundColor: colors.c04,
+    color: colors.c03,
     padding: '5px 8px',
     fontFamily: fontFamily,
     fontSize: 12,
