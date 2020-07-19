@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Search } from 'react-feather';
-import SearchContext from '@root/context/SearchContext';
+import _isEmpty from 'lodash/isEmpty';
+import { parseQueryString } from '@utils/helpers';
 
 const SearchBar = ({ isSmall, onEnter }) => {
-  const { state } = useContext(SearchContext);
-  const { username } = state;
-  const [value, setValue] = useState(username);
+  const { search } = useLocation();
+  const [value, setValue] = useState('');
   const classes = makeStyles(theme => ({
     inputCont: {
       width: '100%',
@@ -43,6 +44,13 @@ const SearchBar = ({ isSmall, onEnter }) => {
   const onChange = e => {
     setValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (!_isEmpty(search)) {
+      const { username } = parseQueryString(search);
+      setValue(username || '');
+    }
+  }, [search]);
 
   return (
     <div className={classes.inputCont}>

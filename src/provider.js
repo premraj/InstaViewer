@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import themes from './themes';
-import { SearchContextProvider } from './context/SearchContext';
 import ThemeContext, { ThemeContextProvider } from './context/ThemeContext';
 
 const Provider = () => {
@@ -14,8 +14,9 @@ const Provider = () => {
 };
 
 const ProviderWithThemeContext = () => {
-  const { state } = useContext(ThemeContext);
-  const { theme } = state;
+  const {
+    state: { theme },
+  } = useContext(ThemeContext);
 
   useEffect(() => {
     const body = document.querySelector('body');
@@ -24,9 +25,9 @@ const ProviderWithThemeContext = () => {
 
   return (
     <ThemeProvider theme={themes[theme]}>
-      <SearchContextProvider>
+      <BrowserRouter>
         <App />
-      </SearchContextProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

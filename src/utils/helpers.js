@@ -30,3 +30,17 @@ export const formatUnixDate = unix => {
   }
   return momentObject.fromNow();
 };
+
+export const parseQueryString = search => {
+  let searchTrimmed = search.trim();
+  searchTrimmed =
+    searchTrimmed[0] === '?' ? searchTrimmed.substring(1) : searchTrimmed;
+
+  const params = searchTrimmed.split('&');
+  const obj = {};
+  params.forEach(p => {
+    const [key, value] = p.split('=');
+    obj[key] = value;
+  });
+  return obj;
+};

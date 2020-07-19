@@ -7,15 +7,16 @@ const initialState = {
 };
 
 export const actionSetTheme = payload => ({ type: 'setTheme', payload });
+const reducerSetTheme = theme => ({ theme });
+
+const actionReducerMap = {
+  setTheme: reducerSetTheme,
+};
 
 const reducer = (state, action) => {
   const { type, payload } = action;
-  switch (type) {
-    case 'setTheme':
-      return { theme: payload };
-    default:
-      return state;
-  }
+  if (actionReducerMap[type]) return actionReducerMap[type](payload);
+  return state;
 };
 
 export const ThemeContextProvider = ({ children }) => {

@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import FeedView from '../view/FeedView';
-import SearchContext from '@root/context/SearchContext';
-import { getInstDataFromJSON } from '@utils/helpers';
+import _isEmpty from 'lodash/isEmpty';
+import { getInstDataFromJSON, parseQueryString } from '@utils/helpers';
 
 const FeedController = () => {
-  const { state } = useContext(SearchContext);
+  const { search } = useLocation();
   const [feed, setFeed] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const { username } = state;
 
-  const getData = () => {
+  const getData = username => {
     setIsLoading(true);
     setIsError(false);
     axios
@@ -28,8 +28,11 @@ const FeedController = () => {
   };
 
   useEffect(() => {
-    if (username) getData();
-  }, [username]);
+    if (!_isEmpty(search)) {
+      const { username } = parseQueryString(search);
+      if (username) getData(username);
+    }
+  }, [search]);
 
   return <FeedView isLoading={isLoading} isError={isError} feed={feed} />;
 };
