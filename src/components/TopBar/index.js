@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import useTheme from '@material-ui/core/styles/useTheme';
@@ -8,13 +8,17 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Settings, XCircle } from 'react-feather';
-import ThemeContext, { actionSetTheme } from '@root/context/ThemeContext';
+import {
+  useThemeState,
+  useThemeDispatch,
+  actionSetTheme,
+} from '@root/context/ThemeContext';
 import SearchBar from '../SearchBar';
 
 const TopBar = ({ onEnter }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { state: themeContext, dispatch } = useContext(ThemeContext);
-  const { theme: selectedTheme } = themeContext;
+  const selectedTheme = useThemeState();
+  const dispatch = useThemeDispatch();
 
   const theme = useTheme();
   const mqUp800 = useMediaQuery(theme.mq.Up800);

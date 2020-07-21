@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import themes from './themes';
-import ThemeContext, { ThemeContextProvider } from './context/ThemeContext';
+import { useThemeState, ThemeContextProvider } from './context/ThemeContext';
 
 const Provider = () => {
   return (
@@ -14,9 +14,7 @@ const Provider = () => {
 };
 
 const ProviderWithThemeContext = () => {
-  const {
-    state: { theme },
-  } = useContext(ThemeContext);
+  const theme = useThemeState();
 
   useEffect(() => {
     const body = document.querySelector('body');

@@ -1,13 +1,12 @@
-import React, { useReducer, useMemo } from 'react';
+import React, { useReducer, useContext } from 'react';
 
-const ThemeContext = React.createContext();
+const ThemeStateContext = React.createContext();
+const ThemeDispatchContext = React.createContext();
 
-const initialState = {
-  theme: 'theme1',
-};
+const initialState = 'theme1';
 
-export const actionSetTheme = payload => ({ type: 'setTheme', payload });
-const reducerSetTheme = theme => ({ theme });
+const actionSetTheme = payload => ({ type: 'setTheme', payload });
+const reducerSetTheme = theme => theme;
 
 const actionReducerMap = {
   setTheme: reducerSetTheme,
@@ -19,15 +18,31 @@ const reducer = (state, action) => {
   return state;
 };
 
-export const ThemeContextProvider = ({ children }) => {
+const ThemeContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
   return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeDispatchContext.Provider value={dispatch}>
+      <ThemeStateContext.Provider value={state}>
+        {children}
+      </ThemeStateContext.Provider>
+    </ThemeDispatchContext.Provider>
   );
 };
 
-export default ThemeContext;
+const useThemeState = () => {
+  const state = useContext(ThemeStateContext);
+  return state;
+};
+
+const useThemeDispatch = () => {
+  const dispatch = useContext(ThemeDispatchContext);
+  return dispatch;
+};
+
+export {
+  ThemeContextProvider,
+  actionSetTheme,
+  useThemeState,
+  useThemeDispatch,
+};
