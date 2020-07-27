@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    marginTop: 15,
   },
   emptyMessage: {
     color: theme.colors.c05,

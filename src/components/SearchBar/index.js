@@ -9,10 +9,26 @@ import { parseQueryString } from '@utils/helpers';
 const SearchBar = ({ isSmall, onEnter }) => {
   const { search } = useLocation();
   const [value, setValue] = useState('');
+
+  const getBackgroundColor = (theme, index, defaultValue) => {
+    const bgArr = theme.searchBarInput && theme.searchBarInput.backgroundColor;
+    return bgArr ? bgArr[index] : defaultValue;
+  };
+
   const classes = makeStyles(theme => ({
+    inputWrapper: {
+      backgroundColor: theme.colors.c06,
+      position: 'fixed',
+      top: 50,
+      width: 'calc(100% - 30px)',
+      zIndex: 1,
+      padding: '15px 0',
+    },
     inputCont: {
       width: '100%',
-      backgroundColor: isSmall ? theme.colors.c01 : theme.colors.c02,
+      backgroundColor: isSmall
+        ? getBackgroundColor(theme, 0, theme.colors.c01)
+        : getBackgroundColor(theme, 0, theme.colors.c02),
       borderRadius: 40,
       display: 'flex',
       alignItems: 'center',
@@ -21,7 +37,9 @@ const SearchBar = ({ isSmall, onEnter }) => {
     input: {
       fontFamily: theme.fontFamily,
       fontSize: isSmall ? 16 : 28,
-      backgroundColor: isSmall ? theme.colors.c01 : theme.colors.c02,
+      backgroundColor: isSmall
+        ? getBackgroundColor(theme, 0, theme.colors.c01)
+        : getBackgroundColor(theme, 0, theme.colors.c02),
       color: theme.colors.c05,
       width: '100%',
       border: 0,
@@ -53,14 +71,16 @@ const SearchBar = ({ isSmall, onEnter }) => {
   }, [search]);
 
   return (
-    <div className={classes.inputCont}>
-      <Search className={classes.iconSearch} />
-      <input
-        value={value}
-        className={classes.input}
-        onKeyUp={onPressEnter}
-        onChange={onChange}
-      />
+    <div className={isSmall ? classes.inputWrapper : ''}>
+      <div className={classes.inputCont}>
+        <Search className={classes.iconSearch} />
+        <input
+          value={value}
+          className={classes.input}
+          onKeyUp={onPressEnter}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 };

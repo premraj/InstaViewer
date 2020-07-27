@@ -22,13 +22,18 @@ const theme = createMuiTheme({
   button: {
     backgroundColor: colors.c01,
     color: colors.c03,
-    padding: '5px 8px',
-    fontFamily: fontFamily,
-    fontSize: 12,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    cursor: 'pointer',
-    textAlign: 'center',
+  },
+  topBarDrawer: {
+    backgroundColor: colors.c07,
+  },
+  radioChecked: {
+    color: colors.c01,
+  },
+  settingsIcon: {
+    color: colors.c03,
+  },
+  searchBarInput: {
+    backgroundColor: [colors.c07, colors.c02],
   },
 });
 

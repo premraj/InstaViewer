@@ -1,0 +1,30 @@
+$themes: (
+  theme1: (
+    bg: #1a2639,
+  ),
+  theme2: (
+    bg: #363434,
+  ),
+  theme3: (
+    bg: #f5eded,
+  ),
+  theme4: (
+    bg: #4d3a4d,
+  ),
+  theme5: (
+    bg: #f3eded,
+  ),
+);
+
+@mixin withTheme() {
+  @each $theme, $map in $themes {
+    $colors: $map !global;
+    .#{$theme} & {
+      @content;
+    }
+  }
+}
+
+@function useColor($color) {
+  @return map-get($colors, $color);
+}

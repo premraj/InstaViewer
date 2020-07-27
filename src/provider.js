@@ -17,8 +17,8 @@ const ProviderWithThemeContext = () => {
   const theme = useThemeState();
 
   useEffect(() => {
-    const body = document.querySelector('body');
-    body.className = theme;
+    const html = document.documentElement;
+    html.className = theme;
   }, [theme]);
 
   return (

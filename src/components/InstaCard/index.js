@@ -62,10 +62,17 @@ const InstaCard = ({ profilePic, username, post, onViewComments }) => {
       justifyContent: 'flex-end',
     },
     button: {
-      ...theme.button,
+      backgroundColor: theme.colors.c04,
+      color: theme.colors.c03,
+      padding: mqDown500 ? 10 : '5px 8px',
+      fontFamily: theme.fontFamily,
+      fontSize: mqDown500 ? 18 : 12,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      cursor: 'pointer',
+      textAlign: 'center',
       width: mqDown500 ? '100%' : 'auto',
-      fontSize: mqDown500 ? 18 : theme.button.fontSize,
-      padding: mqDown500 ? 10 : theme.button.padding,
+      ...theme.button,
     },
   })();
 

@@ -16,14 +16,10 @@ const App = () => {
   const classes = makeStyles({
     container: {
       backgroundColor: theme.colors.c06,
+      marginTop: mqDown500 ? 90 : 80,
     },
     contentContainer: {
       padding: mqDown500 ? 15 : '20px 30px',
-    },
-    scrollContainer: {
-      maxHeight: `calc(100vh - ${mqUp800 ? 120 : 240}px)`,
-      overflowY: 'auto',
-      marginTop: mqUp800 ? 0 : 15,
     },
   })();
 
@@ -36,14 +32,12 @@ const App = () => {
       <TopBar onEnter={onEnter} />
       <div className={classes.contentContainer}>
         {!mqUp800 && <SearchBar isSmall onEnter={onEnter} />}
-        <div className={classes.scrollContainer}>
-          <Switch>
-            {routes.map(({ key, path, component }) => (
-              <Route exact key={key} path={path} component={component} />
-            ))}
-            <Redirect to="/feed" />
-          </Switch>
-        </div>
+        <Switch>
+          {routes.map(({ key, path, component }) => (
+            <Route exact key={key} path={path} component={component} />
+          ))}
+          <Redirect to="/feed" />
+        </Switch>
       </div>
     </div>
   );

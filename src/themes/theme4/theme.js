@@ -19,17 +19,6 @@ const theme = createMuiTheme({
     Up800: '(min-width:800px)',
     Down500: '(max-width:500px)',
   },
-  button: {
-    backgroundColor: colors.c04,
-    color: colors.c03,
-    padding: '5px 8px',
-    fontFamily: fontFamily,
-    fontSize: 12,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    cursor: 'pointer',
-    textAlign: 'center',
-  },
 });
 
 export default theme;

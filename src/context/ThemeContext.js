@@ -1,7 +1,7 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, createContext } from 'react';
 
-const ThemeStateContext = React.createContext();
-const ThemeDispatchContext = React.createContext();
+const ThemeStateContext = createContext();
+const ThemeDispatchContext = createContext();
 
 const initialState = 'theme1';
 

@@ -31,6 +31,11 @@ const TopBar = ({ onEnter }) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: mqDown500 ? 15 : '20px 30px',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      zIndex: 1,
     },
     logoFront: {
       fontFamily: theme.fontFamily,
@@ -47,6 +52,7 @@ const TopBar = ({ onEnter }) => {
     settingIcon: {
       color: theme.colors.c04,
       cursor: 'pointer',
+      ...theme.settingsIcon,
     },
     logoCont: {
       width: '33%',
@@ -71,6 +77,7 @@ const TopBar = ({ onEnter }) => {
         padding: 30,
         fontSize: 16,
         fontFamily: theme.fontFamily,
+        ...theme.topBarDrawer,
       },
     },
     selectThemeHeader: {
@@ -88,6 +95,7 @@ const TopBar = ({ onEnter }) => {
     radio: {
       '& .MuiRadio-root.Mui-checked': {
         color: theme.colors.c04,
+        ...theme.radioChecked,
       },
       '& .MuiRadio-root': {
         color: theme.colors.c05,

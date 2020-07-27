@@ -27,7 +27,14 @@ module.exports = function(env) {
         '@utils': path.resolve(__dirname, 'src/utils'),
       },
     },
-    plugins: [new CopyPlugin([{ from: path.resolve(__dirname, 'public') }])],
+    plugins: [
+      new CopyPlugin([
+        {
+          from: path.resolve(__dirname, 'public'),
+          ignore: ['sass/**/*'],
+        },
+      ]),
+    ],
     devServer: {
       host: IP.address(),
       port: 3200,
